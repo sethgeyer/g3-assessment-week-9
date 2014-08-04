@@ -44,5 +44,23 @@ feature "ToDos" do
   end
 
 
+  scenario "A signed-in user can complete an already created 'to-do'" do
+
+    visit "/"
+
+    register_and_sign_in
+
+    fill_in "What do you need to do?", with: "Get a haircut"
+    click_button "Add ToDo"
+
+    expect(page).to have_button("Complete")
+
+    click_on "Complete"
+
+    expect(page).not_to have_content("Get a haircut")
+
+  end
+
+
 
 end

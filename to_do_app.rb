@@ -80,6 +80,11 @@ class ToDoApp < Sinatra::Application
     redirect "/"
   end
 
+  delete "/todos" do
+    ToDoItem.destroy(params[:complete].to_i)
+    redirect "/"
+  end
+
 
   private
 

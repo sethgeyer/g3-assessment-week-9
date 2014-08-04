@@ -28,6 +28,11 @@
           <li>
             <%= todo.body %>
             <a href="todos/<%=todo.id%>/edit">Edit</a>
+
+            <form method="POST" action="/todos">
+              <input type="hidden" name="_method" value="DELETE">
+              <button name="complete" value="<%=todo.id%>">Complete</button>
+            </form>
           </li>
       <% end %>
     </ul>
