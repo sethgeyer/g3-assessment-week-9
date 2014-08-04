@@ -24,3 +24,19 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+
+def register_and_sign_in
+
+  click_link "Register"
+
+  fill_in "Username", with: "hunta"
+  fill_in "Password", with: "pazzword"
+
+  click_button "Register"
+
+  fill_in "Username", with: "hunta"
+  fill_in "Password", with: "pazzword"
+
+  click_button "Sign In"
+end

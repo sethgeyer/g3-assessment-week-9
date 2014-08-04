@@ -3,17 +3,7 @@ feature "ToDos" do
 
     visit "/"
 
-    click_link "Register"
-
-    fill_in "Username", with: "hunta"
-    fill_in "Password", with: "pazzword"
-
-    click_button "Register"
-
-    fill_in "Username", with: "hunta"
-    fill_in "Password", with: "pazzword"
-
-    click_button "Sign In"
+    register_and_sign_in
 
     expect(page).to have_content "Welcome, hunta"
 
@@ -26,4 +16,33 @@ feature "ToDos" do
       expect(page).to have_content "Get a haircut"
     end
   end
+
+  scenario "A signed-in user can edit an already created 'to-do'" do
+
+    visit "/"
+
+    register_and_sign_in
+
+    fill_in "What do you need to do?", with: "Get a haircut"
+    click_button "Add ToDo"
+
+    expect(page).to have_link("Edit")
+
+    click_on "Edit"
+
+    expect(page).to have_css("#edit_todos")
+    expect(page).to have_content("Get a haircut")
+
+    fill_in "Description", with: "Shave my back"
+    click_on "Update ToDo"
+
+    expect(page).to have_content("Shave my back")
+    expect(page).not_to have_content("Get a haircut")
+    expect(page).to have_link("Edit")
+
+
+  end
+
+
+
 end
