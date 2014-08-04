@@ -19,7 +19,7 @@ class ToDoApp < Sinatra::Application
       user = current_user
 
       users = User.where("id != #{user.id}")
-      todos = ToDoItem.all
+      todos = ToDoItem.where(user_id: user.id)
       erb :signed_in, locals: {current_user: user, users: users, todos: todos}
     else
       erb :signed_out
@@ -60,7 +60,7 @@ class ToDoApp < Sinatra::Application
   end
 
   post "/todos" do
-    ToDoItem.create(body: params[:body])
+    ToDoItem.create(user_id: session[:user_id], body: params[:body])
 
     flash[:notice] = "ToDo added"
 
@@ -74,7 +74,7 @@ class ToDoApp < Sinatra::Application
   end
 
   patch "/todos" do
-    to_do_to_edit = ToDoItem.find(params[:id].to_i)
+    to_do_to_edit = ToDoItem.find(params[:update].to_i)
     to_do_to_edit.body = params[:body]
     to_do_to_edit.save!
     redirect "/"

@@ -3,11 +3,9 @@
 <h3>Edit To Do</h3>
   <form method="POST" action="/todos">
     <input type="hidden" name="_method" value="PATCH">
-    <input name="id" readonly value="<%=to_do_to_edit.id%>"/>
-
     <label for="body">Description</label><br/>
     <textarea id="body" name="body"> <%=to_do_to_edit.body%></textarea><br/>
-    <button>Update ToDo</button>
+    <button name="update" value="<%=to_do_to_edit.id%>">Update ToDo</button>
   </form>
 
 </div>

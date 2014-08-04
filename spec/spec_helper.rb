@@ -26,17 +26,23 @@ RSpec.configure do |config|
 end
 
 
-def register_and_sign_in
+def register_and_sign_in(name, password)
 
   click_link "Register"
 
-  fill_in "Username", with: "hunta"
-  fill_in "Password", with: "pazzword"
+  fill_in "Username", with: name
+  fill_in "Password", with: password
 
   click_button "Register"
 
-  fill_in "Username", with: "hunta"
-  fill_in "Password", with: "pazzword"
+  fill_in "Username", with: name
+  fill_in "Password", with: password
 
   click_button "Sign In"
+
+end
+
+def create_a_to_do(description)
+  fill_in "What do you need to do?", with: description
+  click_button "Add ToDo"
 end
